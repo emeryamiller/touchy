@@ -146,7 +146,8 @@
                   "movePoint":     startPoint,
                   "lastMovePoint": startPoint,
                   "startPoint":    startPoint,
-                  "velocity":      0
+                  "velocity":      0,
+                  "degrees":       0
                 }]);
                 break;
 
@@ -234,13 +235,16 @@
                   lastMovePoint = data.lastMovePoint,
                   distance = movePoint.x === lastMovePoint.x && movePoint.y === lastMovePoint.y ? 0 : Math.sqrt( Math.pow( (movePoint.x - lastMovePoint.x), 2 ) + Math.pow( (movePoint.y - lastMovePoint.y), 2 ) ),
                   ms = data.moveDate - data.lastMoveDate,
-                  velocity = ms === 0 ? 0 : distance / ms;
+                  velocity = ms === 0 ? 0 : distance / ms,
+                  radians = Math.atan2(movePoint.y - startPoint.y, movePoint.x - startPoint.x),
+                  degrees = data.degrees = radians * (180 / Math.PI);
                 if (data.held) {
                   $target.trigger('touchy-drag', ['move', $target, {
                     "movePoint":     movePoint,
                     "lastMovePoint": lastMovePoint,
                     "startPoint":    data.startPoint,
-                    "velocity":      velocity
+                    "velocity":      velocity,
+                    "degrees":       degrees
                   }]);
                 }
                 break;
@@ -432,12 +436,15 @@
                   lastMovePoint = data.lastMovePoint || data.startPoint,
                   distance = movePoint.x === lastMovePoint.x && movePoint.y === lastMovePoint.y ? 0 : Math.sqrt( Math.pow( (movePoint.x - lastMovePoint.x), 2 ) + Math.pow( (movePoint.y - lastMovePoint.y), 2 ) ),
                   ms = data.moveDate - data.lastMoveDate,
-                  velocity = ms === 0 ? 0 : distance / ms;
+                  velocity = ms === 0 ? 0 : distance / ms,
+                  radians = Math.atan2(movePoint.y - centerCoords.y, movePoint.x - centerCoords.x),
+                  degrees = data.degrees = radians * (180 / Math.PI);
                 $target.trigger('touchy-drag', ['end', $target, {
                   "movePoint":     movePoint,
                   "lastMovePoint": lastMovePoint,
                   "startPoint":    data.startPoint,
-                  "velocity":      velocity
+                  "velocity":      velocity,
+                  "degrees":       degrees
                 }]);
               }
               $.extend(data, {
