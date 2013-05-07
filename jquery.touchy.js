@@ -236,7 +236,7 @@
                   distance = movePoint.x === lastMovePoint.x && movePoint.y === lastMovePoint.y ? 0 : Math.sqrt( Math.pow( (movePoint.x - lastMovePoint.x), 2 ) + Math.pow( (movePoint.y - lastMovePoint.y), 2 ) ),
                   ms = data.moveDate - data.lastMoveDate,
                   velocity = ms === 0 ? 0 : distance / ms,
-                  radians = Math.atan2(movePoint.y - startPoint.y, movePoint.x - startPoint.x),
+                  radians = Math.atan2(movePoint.y - data.startPoint.y, movePoint.x - datat.startPoint.x),
                   degrees = data.degrees = radians * (180 / Math.PI);
                 if (data.held) {
                   $target.trigger('touchy-drag', ['move', $target, {
@@ -437,7 +437,7 @@
                   distance = movePoint.x === lastMovePoint.x && movePoint.y === lastMovePoint.y ? 0 : Math.sqrt( Math.pow( (movePoint.x - lastMovePoint.x), 2 ) + Math.pow( (movePoint.y - lastMovePoint.y), 2 ) ),
                   ms = data.moveDate - data.lastMoveDate,
                   velocity = ms === 0 ? 0 : distance / ms,
-                  radians = Math.atan2(movePoint.y - centerCoords.y, movePoint.x - centerCoords.x),
+                  radians = Math.atan2(movePoint.y - data.startPoint.y, movePoint.x - data.startPoint.x),
                   degrees = data.degrees = radians * (180 / Math.PI);
                 $target.trigger('touchy-drag', ['end', $target, {
                   "movePoint":     movePoint,
