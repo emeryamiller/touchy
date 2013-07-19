@@ -683,13 +683,7 @@
           i = 0,
           len = boundElems[eventType].length
       if ($.touchyOptions.useDelegation) {
-        for (; i < len; i += 1) {
-          $delegate = $(boundElems[eventType][i]).has(e.target);
-          if ($delegate.length > 0){
-            $target = $delegate;
-            break;
-          }
-        }
+        $target = $(e.target)
       }
       else if (boundElems[eventType] && boundElems[eventType].index(e.target) != -1) {
         $target = $(e.target)
